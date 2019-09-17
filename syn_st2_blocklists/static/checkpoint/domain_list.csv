@@ -1,0 +1,8 @@
+# Checkpoint Custom Intelligence Feed
+# Updated by Syncurity IR-Flow
+# Blocked Domain List
+# ioc_feeds add --feed_name domain_list --transport https --resource "https://isc.sans.edu/feeds/suspiciousdomains_High.txt" \\
+#  --format [type:domain,value:1] --format [type:product,value:2] --comment "#, Site"
+
+www.baddomain.com sycnurity_irflow
+www.systemlowcheck.com sycnurity_irflow

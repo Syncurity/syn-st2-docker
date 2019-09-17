@@ -1,0 +1,11 @@
+# Checkpoint Custom Intelligence Feed
+# Updated by Syncurity IR-Flow
+# IP Address List
+
+# Checkpoint CLI to register this feed for polling
+# ioc_feeds add --feed_name ip_list --transport http --resource "https://this_server_ip_host_name/ip_block.txt"  --format [value:1,type:ip] --format [value:2, type:product]
+
+1.1.1.1 irflow
+1.1.1.2 irflow
+1.1.1.32 irflow
+1.1.1.4/32 irflow
