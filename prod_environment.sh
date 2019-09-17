@@ -57,15 +57,15 @@ echo "Removing env vars from memory"
 unset -v POSTGRESQL_ADMIN_PASSWORD
 
 #Show container environment
-sleep 5 && docker ps
+sleep 1 && docker ps
 
 echo "Waiting for Syncurity Service to come up..."
 docker logs syncurity_postgresql
 
 
 # while not docker logs metabase_web | grep
-until [[ $(docker logs syncurity_postgresql | grep COMPLETE) ]]; do
-    echo "$(docker logs syncurity_postgresql | grep COMPLETE)"
-done
+# until [[ $(docker logs syncurity_postgresql | grep "Starting server...") ]]; do
+#    echo "$(docker logs syncurity_postgresql | grep "Starting server...")"
+# done
 
 echo "Complete"
