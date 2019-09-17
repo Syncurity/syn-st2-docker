@@ -27,6 +27,8 @@ services:
       POSTGRESQL_USER: ${POSTGRESQL_USER}
       POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD}
 
+    volumes:
+      - syn_st2_datastore.d:/docker-entrypoint-initdb.d
 
 
 networks:
@@ -39,3 +41,5 @@ networks:
       config:
       - subnet: ${SYNCURITY_ST2_NETWORK_SUBNET}
 
+volumes:
+  syn_st2_datastore.d:

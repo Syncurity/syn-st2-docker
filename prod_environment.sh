@@ -65,7 +65,7 @@ docker logs syncurity_postgresql
 
 # while not docker logs metabase_web | grep
 until [[ $(docker logs syncurity_postgresql | grep COMPLETE) ]]; do
-    print "$(docker logs syncurity_postgresql | grep COMPLETE)"
+    echo "$(docker logs syncurity_postgresql | grep COMPLETE)"
 done
 
 echo "Complete"

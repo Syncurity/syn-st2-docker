@@ -6,8 +6,10 @@ services:
     # irflow_metabase named volume containing PostgreSQL database
     volumes:
       - syncurity_st2:/var/lib/pgsql/data
+      - syn_st2_datastore.d:/docker-entrypoint-initdb.d
 
 
 
 volumes:
   syncurity_st2:
+
