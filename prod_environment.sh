@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -eux
 
 if [ "$(uname)" == "Darwin" ]; then
     printf "OSX detected. This script does not install docker and other tools. Needed to run properly.\n\n"
@@ -18,7 +18,7 @@ fi
 printf "Prod environment setup complete\n"
 
 
-printf "Starting Syncurity Metabase Reporting....\n\n"
+printf "Starting Syncurity Services....\n\n"
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
 
@@ -51,20 +51,20 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 #    printf "\nBrowse to http://localhost:3000 to setup metabase\n\n"
 #fi
 
-printf "Use start-metabase.sh and stop-metabase.sh to turn server on and off \n"
+printf "Use bin/start_syn_services.sh and bin/stop_syn_services.sh to turn server on and off \n"
 
 echo "Removing env vars from memory"
-unset -v MB_DB_DBNAME MB_DB_PASS MB_ENCRYPTION_SECRET_KEY MB_JETTY_SSL_Keystore_Password POSTGRESQL_ADMIN_PASSWORD
+unset -v POSTGRESQL_ADMIN_PASSWORD
 
 #Show container environment
 sleep 5 && docker ps
 
-echo "Waiting for Metabase to come up..."
+echo "Waiting for Syncurity Service to come up..."
 docker logs syncurity_postgresql
 
 
 # while not docker logs metabase_web | grep
-until [ "docker logs syncurity_postgresql | grep COMPLETE" ]; do
+until [[ $(docker logs syncurity_postgresql | grep COMPLETE) ]]; do
     print "$(docker logs syncurity_postgresql | grep COMPLETE)"
 done
 
