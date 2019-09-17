@@ -1,0 +1,32 @@
+version: 2
+jobs:
+  setup:
+      docker:
+          - image: circleci/python:3.6
+      steps:
+          - run:
+              name: Install Docker Compose
+              command: |
+                curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+                chmod +x ~/docker-compose
+                sudo mv ~/docker-compose /usr/local/bin/docker-compose
+          - checkout
+          - setup_remote_docker
+          - run:
+              name: ci_environment.sh
+              command: ~/project/ci_environment.sh
+
+          - run:
+              name: "check that metabase:3000 is running"
+              command: |
+                sleep 30
+                http_status=$(docker run --network container:metabase_web \
+                appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused -s -o /dev/null -w "%{http_code}" http://metabase_web:3000)
+                echo "${http_status}"
+                if [ "${http_status}" -ne "200" ]; then exit 1; else echo 0; fi
+
+workflows:
+  version: 2
+  run_tests:
+    jobs:
+      - setup

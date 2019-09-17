@@ -1,0 +1,41 @@
+
+# docker-compose.yml
+#
+# to start this stack run:
+# docker-compose up
+# docker-compose -d (detached mode)
+# docker-compose logs (see logs)
+# docker-compose stop (halt containers)
+# docker-compose down (destroy containers)
+# docker-compose down --volumes (destroy containers and volumes)
+
+version: '3'
+
+services:
+  syncurity_postgresql:
+    image: centos/postgresql-96-centos7:9.6
+    container_name: syncurity_postgresql
+    hostname: syncurity_postgresql
+    ports:
+      - "${EXTERNAL_POSTGRES_PORT}:5432"
+    networks:
+      - syncurity_network
+
+    restart: always
+    environment:
+      POSTGRESQL_DATABASE: ${POSTGRESQL_DATABASE}
+      POSTGRESQL_USER: ${POSTGRESQL_USER}
+      POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD}
+
+
+
+networks:
+  syncurity_network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+      - subnet: ${SYNCURITY_ST2_NETWORK_SUBNET}
+

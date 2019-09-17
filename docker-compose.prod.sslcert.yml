@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  # SSL Settings
+  metabase_web:
+    ports:
+        - "${MB_JETTY_SSL_Port}:${MB_JETTY_SSL_Port}"
+    environment:
+      MB_JETTY_SSL: ${MB_JETTY_SSL}
+      MB_JETTY_SSL_Port: ${MB_JETTY_SSL_Port}
+      MB_JETTY_SSL_Keystore: ${MB_JETTY_SSL_Keystore}
+      MB_JETTY_SSL_Keystore_Password: ${MB_JETTY_SSL_Keystore_Password}
+
+    # certificate file insert
+    volumes:
+      - certs:/certs
+
+volumes:
+  certs:
+

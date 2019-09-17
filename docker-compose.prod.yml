@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  syncurity_postgresql:
+
+    # irflow_metabase named volume containing PostgreSQL database
+    volumes:
+      - syncurity_st2:/var/lib/pgsql/data
+
+
+
+volumes:
+  syncurity_st2:
