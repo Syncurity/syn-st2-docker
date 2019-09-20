@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
+HOME='/opt/syncurity/syn-st2-docker'
+CWD=$(pwd)
 
-if [[ ! -f .env ]]; then
-  cp env.template .env
-  echo 'Created .env file in root directory. You might wish to change the defaults.'
+if [[ "${CWD}" -ne "${HOME}" ]]; then
+  echo "Please run this script from '${HOME}' directory. "
 fi
 
-source .env
+
+if [[ ! -f ".env" ]]; then
+  cp "${HOME}/env.template" "${HOME}/.env"
+  echo 'Created .env file in repo root directory. You might wish to change the defaults.'
+fi
+
+. "${HOME}/.env"
+
 echo "Checking Environment"
 #certs_volume_exists="$(docker volume ls | grep metabase_certs)"
 #echo "${certs_volume_exists}"
@@ -16,6 +24,7 @@ echo "Checking Environment"
 #fi
 
 echo "Starting Syncurity ST2 Services"
+
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
 docker ps
