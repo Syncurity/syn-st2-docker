@@ -21,5 +21,3 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 docker ps
 
 echo "Syncurity ST2 Services Started"
-
-
