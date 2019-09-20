@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [[ ! -f .env ]]; then
+  cp env.template .env
+  echo 'Created .env file in root directory. You might wish to change the defaults.'
+fi
+
 source .env
 echo "Checking Environment"
 #certs_volume_exists="$(docker volume ls | grep metabase_certs)"

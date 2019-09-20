@@ -1,0 +1,39 @@
+
+# docker-compose.yml
+#
+# to start this stack run:
+# docker-compose up
+# docker-compose -d (detached mode)
+# docker-compose logs (see logs)
+# docker-compose stop (halt containers)
+# docker-compose down (destroy containers)
+# docker-compose down --volumes (destroy containers and volumes)
+
+version: '3'
+
+services:
+  syncurity_blocklists:
+    image: quay.io/syncurity/syn-st2-flask
+    container_name: syncurity_blocklists
+    hostname: syncurity_blocklists
+    ports:
+      - "${EXTERNAL_BLOCKLIST_PORT}:8101"
+    networks:
+      - syncurity_network
+    restart: always
+    volumes:
+      - static:/app/static
+
+
+networks:
+  syncurity_network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+      - subnet: ${SYNCURITY_ST2_NETWORK_SUBNET}
+
+volumes:
+  static:
