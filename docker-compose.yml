@@ -20,7 +20,6 @@ services:
       - "${EXTERNAL_POSTGRES_PORT}:5432"
     networks:
       - syncurity_network
-
     restart: always
     environment:
       POSTGRESQL_DATABASE: ${POSTGRESQL_DATABASE}
@@ -29,6 +28,18 @@ services:
 
     volumes:
       - syn_st2_datastore.d:/docker-entrypoint-initdb.d
+
+  syncurity_firewall_blocklists:
+    image: quay.io/syncurity/syn-st2-flask
+    container_name: syncurity_blocklists
+    hostname: syncurity_blocklists
+    ports:
+      - "${EXTERNAL_BLOCKLIST_PORT}:8101"
+    networks:
+      - syncurity_network
+    restart: always
+    volumes:
+      - static:/app/static
 
 
 networks:
@@ -43,3 +54,4 @@ networks:
 
 volumes:
   syn_st2_datastore.d:
+  static:
