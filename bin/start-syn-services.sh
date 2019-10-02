@@ -8,7 +8,7 @@ fi
 
 
 if [[ ! -f ".env" ]]; then
-  cp "${HOME}/env.template" "${HOME}/.env"
+  sudo cp "${HOME}/env.template" "${HOME}/.env"
   echo 'Created .env file in repo root directory. You might wish to change the defaults.'
 fi
 
