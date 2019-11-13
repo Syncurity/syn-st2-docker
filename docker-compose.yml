@@ -54,4 +54,4 @@ networks:
 
 volumes:
   syn_st2_datastore.d:
-  static:
+  syn_st2_blocklists/static:
