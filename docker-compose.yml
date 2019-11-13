@@ -39,7 +39,7 @@ services:
       - syncurity_network
     restart: always
     volumes:
-      - syn_st2_blocklists/static:/app/static
+      - syn_st2_blocklists:/app
 
 
 networks:
