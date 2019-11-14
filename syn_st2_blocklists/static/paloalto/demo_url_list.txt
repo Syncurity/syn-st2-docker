@@ -1,0 +1,3 @@
+# Syncurity demo URL list
+mail.^.ru
+badcompany.net/
