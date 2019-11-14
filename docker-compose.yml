@@ -39,7 +39,7 @@ services:
       - syncurity_network
     restart: always
     volumes:
-      - syn_st2_blocklists:/app
+      - ./syn_st2_blocklists/static:/app/static
 
 
 networks:
@@ -54,4 +54,3 @@ networks:
 
 volumes:
   syn_st2_datastore.d:
-  syn_st2_blocklists:
